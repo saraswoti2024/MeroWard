@@ -1,0 +1,43 @@
+{% extends "common.html" %}
+
+{% block content %}
+{% load static %}
+
+    <!-- Events Section -->
+    <section class="events">
+      <div class="container">
+        <h2>Upcoming Events</h2>
+
+        <div class="event-grid">
+          <div class="event-box">
+            <img src="assets/images/event1.jpg" alt="Community Meeting" />
+            <h3>Community Meeting</h3>
+            <p><strong>Date:</strong> March 10, 2025</p>
+            <p>Join us for an open discussion with local representatives.</p>
+            <a href="#">More Info</a>
+          </div>
+
+          <div class="event-box">
+            <img src="assets/images/event2.jpg" alt="Health Camp" />
+            <h3>Free Health Camp</h3>
+            <p><strong>Date:</strong> April 5, 2025</p>
+            <p>
+              Get free medical check-ups and consultations at the town hall.
+            </p>
+            <a href="#">More Info</a>
+          </div>
+
+          <div class="event-box">
+            <img src="assets/images/event3.jpg" alt="Cultural Festival" />
+            <h3>Cultural Festival</h3>
+            <p><strong>Date:</strong> May 20, 2025</p>
+            <p>Celebrate our rich culture with music, dance, and food.</p>
+            <a href="#">More Info</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+  
+{% endblock content %}

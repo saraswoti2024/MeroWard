@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MeroWard | Home</title>
+
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
+
+    <!-- Font Awesome for Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header>
+      <div class="container">
+        <h1>MeroWard</h1>
+        <button class="menu-toggle" aria-label="Toggle Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+        <nav>
+          <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'services' %}">Services</a></li>
+            <li><a href="{% url 'news' %}">News</a></li>
+            <li><a href="{% url 'events' %}">Events</a></li>
+            <li><a href="{% url 'contacts' %}">Contact</a></li>
+            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <!-- User Dashboard -->
+            <li><a href="{% url 'adminboard' %}">Admin Panel</a></li>
+            <!-- Admin Dashboard -->
+            <li><a href="{% url 'log_in' %}" class="btn">Login</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    {% block content %}
+      
+    {% endblock content %}
+
+    <!-- Footer Section -->
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 MeroWard. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Link to JavaScript -->
+    <script src="assets/js/script.js"></script>
+  </body>
+</html>

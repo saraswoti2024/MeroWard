@@ -1,0 +1,36 @@
+{% extends "common.html" %}
+
+{% block content %}
+{% load static %}
+
+    <!-- Dashboard Content -->
+    <section class="dashboard">
+      <div class="container">
+        <h2>Welcome, User!</h2>
+        <div class="dashboard-grid">
+          <div class="dashboard-box">
+            <i class="fas fa-calendar-check"></i>
+            <h3>Appointments</h3>
+            <p>View and manage your upcoming appointments.</p>
+            <a href="appointments.html" class="btn">Manage</a>
+          </div>
+
+          <div class="dashboard-box">
+            <i class="fas fa-bullhorn"></i>
+            <h3>Complaints</h3>
+            <p>Track and submit complaints to the local government.</p>
+            <a href="complaints.html" class="btn">View</a>
+          </div>
+
+          <div class="dashboard-box">
+            <i class="fas fa-newspaper"></i>
+            <h3>News & Updates</h3>
+            <p>Stay informed about the latest community news.</p>
+            <a href="news.html" class="btn">Read More</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  
+{% endblock content %}
