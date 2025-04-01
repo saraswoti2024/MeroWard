@@ -20,6 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 from decouple import config
+
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG')
 
@@ -126,3 +127,12 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+##message tags
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.SUCCESS: "success",
+    messages.ERROR: "danger",
+    50: "critical",
+}

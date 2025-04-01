@@ -84,7 +84,7 @@ nosetests.xml
 coverage.xml 
 *.cover 
 .hypothesis/ 
-
+note.txt
 # Jupyter Notebook 
 .ipynb_checkpoints 
 

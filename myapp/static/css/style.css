@@ -77,11 +77,13 @@
   .hero h2 {
     font-size: 36px;
     margin-bottom: 10px;
+    color: black;
   }
   
   .hero p {
     font-size: 18px;
     margin-bottom: 20px;
+    color: black;
   }
   
   .hero .btn {
@@ -295,3 +297,13 @@
       width: 90%;
     }
   }
+
+.formc{
+  margin: 30px;
+  padding : 30px;
+  background-color: #d9d5c9;
+}
+
+.dform{
+  margin-bottom: 20px;
+}

@@ -10,10 +10,9 @@ urlpatterns = [
     path("dashboard/",dashboard,name="dashboard"),
     path("adminboard/",adminboard,name="adminboard"),
     path("contacts/",contacts,name="contacts"),
-
+    path("appointments/",appointments,name="appointments"),
+    path("complaints/",complaints,name="complaints"),
     #auth
      path("log_in/",log_in,name="log_in"),
      path("register/",register,name="register"),
-
-
 ]
