@@ -2,6 +2,9 @@ from django.shortcuts import render,redirect
 from .forms import *
 from .models import *
 from django.contrib import messages
+from datetime import datetime
+from django.template.loader import render_to_string
+from django.core.mail import send_mail,EmailMessage
 
 # Create your views here.
 def home(request):
@@ -22,7 +25,16 @@ def contacts(request):
             email = form.cleaned_data['email']
             message = form.cleaned_data['message'] 
             try:
-                Contact.objects.create(name=name,email=email,message=message)
+                detail = Contact(name=name,email=email,message=message)
+                detail.full_clean()
+                detail.save()
+                  ###### send mail #########
+                subject = "Thank you for getting in Touch!"
+                message = render_to_string('myapp/gmail.html',{'name':name,'date':datetime.now()})
+                from_email = 'saraswotikhadka2k2@gmail.com'
+                recipient_list = [email] 
+                emailmsg = EmailMessage(subject,message,from_email,recipient_list)
+                emailmsg.send(fail_silently=True)
                 messages.success(request,'successfully sent!')
                 return redirect('contacts')
             except Exception as e:
