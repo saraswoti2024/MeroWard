@@ -3,7 +3,7 @@
 {% block content %}
 {% load static %}
 <!-- Login Section -->
-<section class="reg d-flex align-items-center justify-content-center min-vh-100 py-5">
+<section class="reg d-flex align-items-center justify-content-center min-vh-80 py-4">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-5">
@@ -11,29 +11,39 @@
           <img src="{% static 'images/nepal.png' %}" alt="" height="300px" width="300px">
         </div>
       </div>
-      <div class="col-7 col-md-5 col-lg-4 sh">
+      <div class="col-7 col-md-5  sh">
         <div class="card ">
           <h2 class="text-center mb-4 fw-bold">Register</h2>
           <form action="{% url 'register' %}" method="POST" class="login-form">
-            <div class="mb-3">
+            {% csrf_token %}
+            {% if messages %}
+            {% for m in messages  %}
+              <div class="alert alert-{{m.tags}}">{{m|safe}}</div>
+            {% endfor %}
+            {% endif %}
+            <div class="mb-2">
               <label for="firstname" class="form-label">First Name</label>
-              <input type="text" id="firstname" name="firstname" class="form-control rounded-3" placeholder="John" required />
+              <input type="text" id="firstname" name="firstname" class="form-control rounded-3" placeholder="John"  />
             </div>
-            <div class="mb-3">
+            <div class="mb-2">
               <label for="lastname" class="form-label">Last Name</label>
-              <input type="text" id="lastname" name="lastname" class="form-control rounded-3" placeholder="Doe" required />
+              <input type="text" id="lastname" name="lastname" class="form-control rounded-3" placeholder="Doe"  />
             </div>
-            <div class="mb-3">
+            <div class="mb-2">
               <label for="username" class="form-label">Username</label>
-              <input type="text" id="username" name="username" class="form-control rounded-3" placeholder="john_doe" required />
+              <input type="text" id="username" name="username" class="form-control rounded-3" placeholder="john_doe"  />
             </div>
-            <div class="mb-3">
+            <div class="mb-2">
               <label for="email" class="form-label">Email</label>
-              <input type="email" id="email" name="email" class="form-control rounded-3" placeholder="example@mail.com" required />
+              <input type="email" id="email" name="email" class="form-control rounded-3" placeholder="example@mail.com"  />
             </div>
-            <div class="mb-3">
+            <div class="mb-2">
               <label for="password" class="form-label">Password</label>
-              <input type="password" id="password" name="password" class="form-control rounded-3" placeholder="********" required />
+              <input type="password" id="password" name="password" class="form-control rounded-3" placeholder="********"  />
+            </div>
+            <div class="mb-2">
+              <label for="password" class="form-label">Confirm Password</label>
+              <input type="password" id="password1" name="password1" class="form-control rounded-3" placeholder="********"  />
             </div>
             <button type="submit" class="btn btn-primary w-100 rounded-3">Register</button>
           </form>
@@ -46,4 +56,14 @@
     </div>
   </div>
 </section>
+// Check if there is a success message and redirect after 4 seconds
+<script>
+   {% for message in messages %}
+    {% if 'success' in message.tags %}
+      setTimeout(function () {
+        window.location.href = "{% url 'log_in' %}";
+      }, 4000);  // 4000ms = 4 seconds
+    {% endif %}
+  {% endfor %}
+</script>
 {% endblock content %}

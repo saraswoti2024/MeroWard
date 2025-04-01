@@ -5,6 +5,10 @@ from django.contrib import messages
 from datetime import datetime
 from django.template.loader import render_to_string
 from django.core.mail import send_mail,EmailMessage
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.password_validation import validate_password
+import re
 
 # Create your views here.
 def home(request):
@@ -63,8 +67,43 @@ def complaints(request):
 
 #auth
 def log_in(request):
-    # return redirect('home')
     return render(request,'auth/log_in.html')
 
 def register(request):
+    if request.method=='POST':
+        fname = request.POST['firstname']
+        lname = request.POST['lastname']
+        uname = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        password1 = request.POST['password1']
+        if password==password1:
+            try:
+                validate_password(password) 
+                if password== uname:
+                    messages.error(request,'password and uname shouldn\'t be same')
+                if not re.search(r'[A-Z]',password):
+                    messages.error(request,'password should contain at least one upper letter')
+                    return redirect('register')
+                if not re.search(r'\d',password):
+                    messages.error(request,'password should at least contain one number')
+                    return redirect('register')
+                if not re.search(r'\W',password):
+                    messages.error(request,'password should at least contain one special character')
+                    return redirect('register')
+                if User.objects.filter(username=uname).exists():
+                    messages.error(request,'username already exists!')
+                    return redirect('register')
+                if User.objects.filter(email=email).exists():
+                    messages.error(request,'email already exists!')
+                    return redirect('register')
+                User.objects.create_user(first_name=fname,last_name=lname,username=uname,email=email,password=password)
+                messages.success(request,'Register successfully!<br>Redirecting to login page......')
+                return redirect('register')
+            except Exception as e:
+                messages.error(request,f'{str(e)}')
+                return redirect('register')
+        else:
+            messages.error(request,'password and confirm password should match!!')
+            return redirect('register')
     return render(request,'auth/register.html')

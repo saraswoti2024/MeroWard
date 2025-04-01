@@ -12,7 +12,8 @@
       <div class="col-7 col-lg-4">
         <div class="card">
           <h2 class="text-center mb-4 fw-bold">Login</h2>
-          <form action="{% url 'register' %}" method="POST" class="login-form">
+          <form action="{% url 'log_in' %}" method="POST" class="login-form">
+            {% csrf_token %}
             <div class="mb-3">
               <label for="username" class="form-label">Username</label>
               <input type="text" id="username" name="username" class="form-control rounded-3" placeholder="john_doe" required />
