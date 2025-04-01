@@ -22,3 +22,21 @@ document.addEventListener("DOMContentLoaded", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   });
+
+
+  // Handle modal visibility
+const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+const registerModal = new bootstrap.Modal(document.getElementById('registerModal'));
+
+// Optional: Auto-close modal after submission
+document.querySelectorAll('form').forEach((form) => {
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Form submitted!');
+        loginModal.hide();
+        registerModal.hide();
+    });
+});
+
+
+

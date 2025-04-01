@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{% static 'css/responsive.css' %}" />
     <link rel="stylesheet" href="{% static 'css/admin.css' %}" />
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
 
     <!-- Font Awesome for Icons -->
     <link
@@ -26,9 +27,7 @@
     <!-- Header Section -->
     <header>
       <div class="container">
-        <h1>MeroWard</h1>
-        <button class="menu-toggle" aria-label="Toggle Menu">
-          <i class="fas fa-bars"></i>
+       <a href="{% url 'home' %}"><img src="{% static 'images/whitelogo.png' %}" alt="" width="100px" height="100px"></a>
         </button>
         <nav>
           <ul>
