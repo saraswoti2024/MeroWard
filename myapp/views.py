@@ -8,6 +8,7 @@ from django.core.mail import send_mail,EmailMessage
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.password_validation import validate_password
+from django.contrib.auth.decorators import login_required
 import re
 
 # Create your views here.
@@ -46,28 +47,51 @@ def contacts(request):
                 return redirect('contacts')
     return render(request,'myapp/contacts.html',{'form':form})
 
+@login_required(login_url='log_in')
 def events(request):
     return render(request,'myapp/events.html')
 
+@login_required(login_url='log_in')
 def news(request):
     return render(request,'myapp/news.html')
 
 def adminboard(request):
     return render(request,'myapp/adminboard.html')
 
+@login_required(login_url='log_in')
 def dashboard(request):
     return render(request,'myapp/dashboard.html')
 
+@login_required(login_url='log_in')
 def appointments(request):
     return render(request,'myapp/appointments.html')
 
+@login_required(login_url='log_in')
 def complaints(request):
     return render(request,'myapp/complaints.html')
 
 
 #auth
 def log_in(request):
-    return render(request,'auth/log_in.html')
+    if request.method=='POST':
+        uname = request.POST['username']
+        password = request.POST['password']
+        if not User.objects.filter(username=uname).exists():
+            messages.error(request,'username doesnot exists!')
+            return redirect('log_in')
+        people = authenticate(username=uname,password=password)
+        if people is not None:
+            login(request,people)
+            next1 = request.POST.get('next','')
+            if next1 and next1 != 'None' and next1 != '':  
+                return redirect(next1)  # Redirect to the 'next' URL if it's valid
+            else:
+                return redirect('home')
+        else:
+            messages.error(request,'invalid password!')
+            return redirect('log_in')
+    next = request.GET.get('next')
+    return render(request,'auth/log_in.html',{'next':next})
 
 def register(request):
     if request.method=='POST':
@@ -107,3 +131,7 @@ def register(request):
             messages.error(request,'password and confirm password should match!!')
             return redirect('register')
     return render(request,'auth/register.html')
+
+def log_out(request):
+    logout(request)
+    return redirect('log_in')

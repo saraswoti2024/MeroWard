@@ -41,8 +41,12 @@
             <!-- User Dashboard -->
             <li><a href="{% url 'adminboard' %}">Admin Panel</a></li>
             <!-- Admin Dashboard -->
+            {% if request.user.is_authenticated %}
+             <li><a href="{% url 'log_out' %}" class="btn">logout</a></li>
+            {% else %}
             <li><a href="{% url 'log_in' %}" class="btn">Login</a></li>
             <li><a href="{% url 'register' %}" class="btn">Register</a></li>
+            {% endif %}
           </ul>
         </nav>
       </div>
