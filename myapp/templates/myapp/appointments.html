@@ -1,6 +1,38 @@
-{% extends "common.html" %}
-
-{% block content %}
-{% load static %}
-  <p>appointments</p>
-{% endblock content %}
+{% extends "common.html" %} {% block content %} {% load static %}
+<div class="container mx-5 my-5">
+  <div class="row mx-auto">
+    <div class="col-7 mx-auto">
+      <div class="ev">
+        <p>Marriage Certificate</p>
+        <a href="{% url 'emergency' %}"><button class="bg-danger">Emergency</button></a
+        ><a href="{% url 'view_app' %}"><button>View</button></a>
+        </div>
+        <div class="ev">
+          <p>Marriage Certificate</p>
+          <a href="{% url 'emergency' %}"><button class="bg-danger">Emergency</button></a
+          ><a href="{% url 'view_app' %}"><button>View</button></a>
+          </div>
+          <div class="ev">
+            <p>Marriage Certificate</p>
+            <a href="{% url 'emergency' %}"><button class="bg-danger">Emergency</button></a
+            ><a href="{% url 'view_app' %}"><button>View</button></a>
+            </div>
+            <div class="ev">
+              <p>Marriage Certificate</p>
+              <a href="{% url 'emergency' %}"><button class="bg-danger">Emergency</button></a
+              ><a href="{% url 'view_app' %}"><button>View</button></a>
+              </div>
+              <div class="ev">
+                <p>Marriage Certificate</p>
+                <a href="{% url 'emergency' %}"><button class="bg-danger">Emergency</button></a
+                ><a href="{% url 'view_app' %}"><button>View</button></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endblock content %}
+      </div>
+    </div>
+  </div>
+</div>

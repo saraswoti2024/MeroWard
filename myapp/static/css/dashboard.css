@@ -55,3 +55,29 @@
       width: 80%;
     }
   }
+
+  .ev{
+    display: flex;
+    /* justify-content: space-around; */
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+  }
+
+  .ev p{
+    margin-right: 30px;
+  }
+
+  .ev button{
+    margin-right: 15px;
+    display: inline-block;
+    background: #007bff;
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+
+  }

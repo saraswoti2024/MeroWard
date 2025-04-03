@@ -47,29 +47,26 @@ def contacts(request):
                 return redirect('contacts')
     return render(request,'myapp/contacts.html',{'form':form})
 
-@login_required(login_url='log_in')
-def events(request):
-    return render(request,'myapp/events.html')
 
-@login_required(login_url='log_in')
-def news(request):
-    return render(request,'myapp/news.html')
+
 
 def adminboard(request):
     return render(request,'myapp/adminboard.html')
 
-@login_required(login_url='log_in')
-def dashboard(request):
-    return render(request,'myapp/dashboard.html')
+
 
 @login_required(login_url='log_in')
 def appointments(request):
     return render(request,'myapp/appointments.html')
 
-@login_required(login_url='log_in')
-def complaints(request):
-    return render(request,'myapp/complaints.html')
 
+@login_required(login_url='log_in')
+def view_app(request):
+    return render(request,'myapp/view_app.html')
+
+@login_required(login_url='log_in')
+def emergency(request):
+    return render(request,'myapp/emergency.html')
 
 #auth
 def log_in(request):
