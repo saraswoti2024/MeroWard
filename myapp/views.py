@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 import re
 
 # Create your views here.
@@ -135,3 +136,16 @@ def log_out(request):
 
 def profile_dashboard(request):
     return render(request,'profile/profile_dashboard.html')
+
+@login_required(login_url='log_in')
+def change_password(request):
+    form = PasswordChangeForm(user=request.user)
+    if request.method=='POST':
+        form = PasswordChangeForm(user=request.user,data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('log_in')
+    return render(request,'auth/change_password.html',{'form':form})
+
+def settings(request):
+    return render(request,'auth/settings.html')

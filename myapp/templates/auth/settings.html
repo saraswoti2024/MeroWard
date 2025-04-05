@@ -1,0 +1,68 @@
+{% extends "common.html" %}
+{% block content %}
+{% load static %}
+
+  <div class="container mt-4">
+    <h2 class="text-center">Account Settings</h2>
+    <div class="row">
+      <!-- Sidebar for Settings Sections -->
+      <div class="col-md-3">
+        <div class="list-group">
+          <a href="#changePassword" class="list-group-item list-group-item-action">Change Password</a>
+          <a href="#forgotPassword" class="list-group-item list-group-item-action">Forgot Password</a>
+          <a href="#profileSettings" class="list-group-item list-group-item-action">Profile Settings</a>
+          <a href="#emailSettings" class="list-group-item list-group-item-action">Email Settings</a>
+          <a href="#privacySettings" class="list-group-item list-group-item-action">Privacy Settings</a>
+          <a href="#notificationSettings" class="list-group-item list-group-item-action">Notification Settings</a>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="col-md-9">
+        <!-- Change Password Section -->
+        <div id="changePassword" class="section">
+          <h3>Change Password</h3>
+          <p>Manage your account's password.</p>
+          <a href="{% url 'change_password' %}" class="btn btn-primary">Change Password</a>
+        </div>
+        
+        <!-- Forgot Password Section -->
+        <div id="forgotPassword" class="section mt-4">
+            <h3>Forgot Password</h3>
+            <p>If you've forgotten your password, you can reset it here.</p>
+            <a href="{% url 'password_reset' %}" class="btn btn-danger">Reset Password</a>
+          </div>
+
+        <!-- Profile Settings Section -->
+        <div id="profileSettings" class="section mt-4">
+          <h3>Profile Settings</h3>
+          <p>Update your profile information, like your username and profile picture.</p>
+          <button class="btn btn-secondary">Update Profile</button>
+        </div>
+
+        <!-- Email Settings Section -->
+        <div id="emailSettings" class="section mt-4">
+          <h3>Email Settings</h3>
+          <p>Change your email address and manage notifications related to your email.</p>
+          <button class="btn btn-secondary">Change Email</button>
+        </div>
+
+        <!-- Privacy Settings Section -->
+        <div id="privacySettings" class="section mt-4">
+          <h3>Privacy Settings</h3>
+          <p>Control your account’s privacy settings, including visibility and data sharing options.</p>
+          <button class="btn btn-secondary">Update Privacy Settings</button>
+        </div>
+
+        <!-- Notification Settings Section -->
+        <div id="notificationSettings" class="section mt-4">
+          <h3>Notification Settings</h3>
+          <p>Manage your notification preferences for updates and alerts.</p>
+          <button class="btn btn-secondary">Update Notifications</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock content %}
