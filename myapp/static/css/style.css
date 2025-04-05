@@ -195,7 +195,7 @@
     outline: none;
   }
   
-  .btn {
+  .btns {
     display: inline-block;
     background: #007bff;
     color: white;
@@ -207,7 +207,7 @@
     transition: 0.3s;
   }
   
-  .btn:hover {
+  .btns:hover {
     background: #0056b3;
   }
   

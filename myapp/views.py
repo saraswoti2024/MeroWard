@@ -132,3 +132,6 @@ def register(request):
 def log_out(request):
     logout(request)
     return redirect('log_in')
+
+def profile_dashboard(request):
+    return render(request,'profile/profile_dashboard.html')

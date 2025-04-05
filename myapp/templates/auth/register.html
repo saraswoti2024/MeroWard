@@ -49,14 +49,13 @@
           </form>
           <div class="text-center mt-3">
             <p>Already Have an account? <a href="{% url 'log_in' %}" class="text-decoration-none">Login</a></p>
-            <p><a href="#" class="text-decoration-none">Forgot Password?</a></p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-// Check if there is a success message and redirect after 4 seconds
+<!-- // Check if there is a success message and redirect after 4 seconds -->
 <script>
    {% for message in messages %}
     {% if 'success' in message.tags %}

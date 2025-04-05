@@ -40,10 +40,20 @@
             <li><a href="{% url 'adminboard' %}">Admin Panel</a></li>
             <!-- Admin Dashboard -->
             {% if request.user.is_authenticated %}
-             <li><a href="{% url 'log_out' %}" class="btn">logout</a></li>
+            <li>
+            <div class="btn-group">
+              <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="{% static 'images/girlboy.jpg' %}" alt="" width="30px" height="30px">
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a href="{% url 'profile_dashboard' %}"><button class="dropdown-item" type="button">profile</button></a></li>
+                <li><a href="{% url 'log_out' %}"><button class="dropdown-item" type="button">Logout</button></a></li>
+              </ul>
+            </div>
+          </li>
             {% else %}
-            <li><a href="{% url 'log_in' %}" class="btn">Login</a></li>
-            <li><a href="{% url 'register' %}" class="btn">Register</a></li>
+            <li><a href="{% url 'log_in' %}" class="btns">Login</a></li>
+            <li><a href="{% url 'register' %}" class="btns">Register</a></li>
             {% endif %}
           </ul>
         </nav>

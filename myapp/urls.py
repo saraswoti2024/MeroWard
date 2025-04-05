@@ -9,6 +9,7 @@ urlpatterns = [
     path("adminboard/",adminboard,name="adminboard"),
     path("contacts/",contacts,name="contacts"),
     path("appointments/",appointments,name="appointments"),
+    path("profile_dashboard/",profile_dashboard,name="profile_dashboard"),
     #auth
      path("log_in/",log_in,name="log_in"),
      path("register/",register,name="register"),
