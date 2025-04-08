@@ -5,12 +5,10 @@ MeroWard is an e-governance project aimed at enhancing local government services
 ---
 
 ## Features
+**appointment schedule**: Citizen can book appointments for services
+**Contact page**: Citizens can contact local government if they have any queries
+**Emergency Schedule**: if citizen has emergency they can check emergency to get services faster
 
-- **Citizen Services**: Provides residents with access to various municipal services online.
-- **Information Dissemination**: Shares important announcements, news, and updates from the local government.
-- **complaints**: citizen can post complaints and other citizens can interact
-- **Events**: all the events in the municipality will be posted and people can join
-- **Feedback Mechanism**: Allows citizens to submit feedback and suggestions to local authorities.
 
 ---
 
