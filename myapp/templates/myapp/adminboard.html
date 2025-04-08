@@ -11,17 +11,51 @@
         <div class="admin-stats">
           <div class="stat-box">
             <i class="fas fa-users"></i>
-            <p>Users: <span>150</span></p>
+            <p>Users: <span>{{totalu}}</span></p>
           </div>
           <div class="stat-box">
             <i class="fas fa-calendar-check"></i>
-            <p>Appointments: <span>45</span></p>
+            <p>Appointments: <span>{{totala}}</span></p>
           </div>
           <div class="stat-box">
             <i class="fas fa-exclamation-triangle"></i>
-            <p>Complaints: <span>12</span></p>
+            <p>Contacts: <span>{{totalc}}</span></p>
           </div>
         </div>
       </main>
-    </div>  
+      <div class="container">
+        <div class="row">
+          <div class="col-10">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Ward No</th>
+                  <th scope="col">Certificate Appointment</th>
+                  <th scope="col">Request_Type</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for i in appointment %}
+                <tr>
+                  <th scope="row">{{i.id}}</th>
+                  <td>{{i.email}}</td>
+                  <td>{{i.ward}}</td>
+                  <td>Edit</td>
+                  <td>
+                    {% for cert in i.certificates %}
+                      <span>{{ cert|title }}</span>{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                  </td>                
+                  <td>{{i.request_type}}</td>
+                  <td>Book</td>
+                  <td>compeleted</td> 
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
 {% endblock content %}

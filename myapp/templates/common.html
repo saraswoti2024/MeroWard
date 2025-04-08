@@ -37,7 +37,11 @@
             <li><a href="{% url 'contacts' %}">Contact</a></li>
             <li><a href="{% url 'appointments' %}">Appointments</a></li>
             <!-- User Dashboard -->
+             {% if request.user.is_authenticated %}
+             {% if request.user.is_superuser %}   
             <li><a href="{% url 'adminboard' %}">Admin Panel</a></li>
+            {% endif %}
+            {% endif %}
             <!-- Admin Dashboard -->
             {% if request.user.is_authenticated %}
             <li>

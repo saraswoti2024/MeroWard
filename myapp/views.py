@@ -52,12 +52,34 @@ def contacts(request):
 
 
 def adminboard(request):
-    return render(request,'myapp/adminboard.html')
+    total_appointment = AppointmentForm.objects.count()
+    appointment = AppointmentForm.objects.all()
+    total_users = User.objects.count()
+    total_contact = Contact.objects.count()
+    context={
+        'totala':total_appointment,
+        'totalu':total_users,
+        'totalc':total_contact,
+        'appointment':appointment,
+    }
+    return render(request,'myapp/adminboard.html',context)
 
 
 
 @login_required(login_url='log_in')
 def appointments(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        wardno = request.POST['ward']
+        request_type = request.POST['request_type']
+        certificate = request.POST.getlist('certificate')
+        try:
+            AppointmentForm.objects.create(email=email,ward=wardno,request_type=request_type,certificates=certificate)
+            messages.success(request,'sent successfully!')
+            return redirect('appointments')
+        except Exception as e:
+            messages.error(request,f'{str(e)}')
+            return redirect('appointments')
     return render(request,'myapp/appointments.html')
 
 
