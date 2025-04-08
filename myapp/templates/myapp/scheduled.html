@@ -36,7 +36,7 @@
                 <span style="color: green;">Normal</span>
               {% endif %}</td>
 
-              <td><a href="{% url 'completed' %}"><button>Complete</button></a></td>
+              <td><a href="{% url 'complete' i.id %}"><button>Complete</button></a></td>
             </tr>
             {% endfor %}
           </tbody>

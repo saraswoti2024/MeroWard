@@ -51,6 +51,7 @@ def contacts(request):
 def complete(request,id):
     data = AppointmentForm.objects.get(id=id)
     data.iscomplete=True
+    data.isschedule=False
     data.save()
     return redirect('adminboard')
 
@@ -195,5 +196,4 @@ def schedule(request,id):
 
 def scheduled(request):
     data = AppointmentForm.objects.filter(isschedule=True)
-
     return render(request,'myapp/scheduled.html',{'data':data})
