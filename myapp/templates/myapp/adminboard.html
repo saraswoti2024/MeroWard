@@ -2,60 +2,182 @@
 
 {% block content %}
 {% load static %}
-      <!-- Main Content -->
-      <main class="admin-content">
-        <h2>Welcome, Admin</h2>
-        <p>Manage users, complaints, and services here.</p>
+<style>
+  .admin-content {
+    padding: 30px;
+  }
 
-        <!-- Quick Stats -->
-        <div class="admin-stats">
-          <div class="stat-box">
-            <i class="fas fa-users"></i>
-            <p>Users: <span>{{totalu}}</span></p>
-          </div>
-          <div class="stat-box">
-            <i class="fas fa-calendar-check"></i>
-            <p>Appointments: <span>{{totala}}</span></p>
-          </div>
-          <div class="stat-box">
-            <i class="fas fa-exclamation-triangle"></i>
-            <p>Contacts: <span>{{totalc}}</span></p>
-          </div>
-        </div>
-      </main>
-      <div class="container">
-        <div class="row">
-          <div class="col-10">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Ward No</th>
-                  <th scope="col">Certificate Appointment</th>
-                  <th scope="col">Request_Type</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for i in appointment %}
-                <tr>
-                  <th scope="row">{{i.id}}</th>
-                  <td>{{i.email}}</td>
-                  <td>{{i.ward}}</td>
-                  <td>Edit</td>
-                  <td>
-                    {% for cert in i.certificates %}
-                      <span>{{ cert|title }}</span>{% if not forloop.last %}, {% endif %}
-                    {% endfor %}
-                  </td>                
-                  <td>{{i.request_type}}</td>
-                  <td>Book</td>
-                  <td>compeleted</td> 
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+  .admin-content h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 10px;
+    margin-left: 900px;
+
+  }
+
+
+  .admin-stats {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    margin-left: 600px;
+  }
+
+  .stat-box {
+    align-items: center;
+    min-width: 250px;
+    background: linear-gradient(to left, #10477e, #a1a10ea4);
+    color: white;
+    padding: 20px 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  .stat-box i {
+    font-size: 24px;
+    margin-bottom: 10px;
+    display: block;
+    color: white;
+  }
+
+  .stat-box span {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+  }
+  .stat-box p{
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+  }
+
+  .container {
+    padding: 0 30px 60px;
+  }
+
+  .table {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  }
+
+  .table th {
+    background-color: #f5f7fa;
+    color: #333;
+    font-weight: bold;
+  }
+
+  .table td, .table th {
+    padding: 14px 16px;
+    vertical-align: middle;
+    border: 1px solid #eee;
+  }
+
+  .table td button {
+    background: #205b97;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s ease;
+  }
+
+  .table td button:hover {
+    background: #307ced;
+  }
+
+  .certificate-tags span {
+    background: #eef6ff;
+    padding: 5px 10px;
+    margin: 0 5px 5px 0;
+    display: inline-block;
+    border-radius: 8px;
+    color: #013d7c;
+    font-size: 13px;
+  }
+
+  @media (max-width: 768px) {
+    .admin-stats {
+      flex-direction: column;
+    }
+
+    .table {
+      font-size: 13px;
+    }
+
+    .table td button {
+      padding: 6px 10px;
+    }
+  }
+</style>
+
+<!-- Admin Panel -->
+<main class="admin-content">
+  <h2>Welcome, Admin</h2>
+
+  <!-- Quick Stats -->
+  <div class="admin-stats ">
+    <div class="stat-box">
+      <i class="fas fa-users"></i>
+      <p>Users: <span>{{ totalu }}</span></p>
+    </div>
+    <div class="stat-box">
+      <i class="fas fa-calendar-check"></i>
+      <p>Appointments: <span>{{ totala }}</span></p>
+    </div>
+    <div class="stat-box">
+      <i class="fas fa-exclamation-triangle"></i>
+      <p>Contacts: <span>{{ totalc }}</span></p>
+    </div>
+    
+  </div>
+</main>
+  <a href="{% url 'completed' %}"><button>View Completed Data</button></a>
+
+
+<!-- Appointment Table -->
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>Email</th>
+            <th>Ward No</th>
+            <th>Certificates</th>
+            <th>Request Type</th>
+            <th colspan="2" style="text-align: center;">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in appointment %}
+          <tr>
+            <th scope="row">{{ i.id }}</th>
+            <td>{{ i.email }}</td>
+            <td>{{ i.ward }}</td>
+            <td class="certificate-tags">
+              {% for cert in i.certificates %}
+                <span>{{ cert|title }}</span>
+              {% endfor %}
+            </td>
+            <td>{% if i.request_type %}
+              <span style="color: red; font-weight: bold;">Emergency</span>
+              {% else %}
+              <span style="color: green;">Normal</span>
+            {% endif %}</td>
+            <td><button>Schedule</button></td>
+            <td><a href="{% url 'complete' i.id %}"><button >Completed</button></a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
 {% endblock content %}

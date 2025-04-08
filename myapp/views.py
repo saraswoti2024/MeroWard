@@ -48,12 +48,23 @@ def contacts(request):
                 return redirect('contacts')
     return render(request,'myapp/contacts.html',{'form':form})
 
+def complete(request,id):
+    data = AppointmentForm.objects.get(id=id)
+    data.iscomplete=True
+    data.save()
+    return redirect('adminboard')
 
+def completed(request):
+    data = AppointmentForm.objects.filter(iscomplete=True)
+    context={
+        'data':data,
+    }
+    return render(request,'myapp/completed.html',context)
 
 
 def adminboard(request):
     total_appointment = AppointmentForm.objects.count()
-    appointment = AppointmentForm.objects.all()
+    appointment = AppointmentForm.objects.filter(iscomplete=False)
     total_users = User.objects.count()
     total_contact = Contact.objects.count()
     context={
@@ -65,13 +76,12 @@ def adminboard(request):
     return render(request,'myapp/adminboard.html',context)
 
 
-
 @login_required(login_url='log_in')
 def appointments(request):
     if request.method == 'POST':
         email = request.POST['email']
         wardno = request.POST['ward']
-        request_type = request.POST['request_type']
+        request_type = request.POST.get('emergency')=='on'
         certificate = request.POST.getlist('certificate')
         try:
             AppointmentForm.objects.create(email=email,ward=wardno,request_type=request_type,certificates=certificate)
@@ -86,10 +96,6 @@ def appointments(request):
 @login_required(login_url='log_in')
 def view_app(request):
     return render(request,'myapp/view_app.html')
-
-@login_required(login_url='log_in')
-def emergency(request):
-    return render(request,'myapp/emergency.html')
 
 #auth
 def log_in(request):

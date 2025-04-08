@@ -22,7 +22,8 @@ class AppointmentForm(models.Model):
     email = models.EmailField()
     ward = models.PositiveIntegerField(choices=[(i, f"Ward {i}") for i in range(1, 36)])
     certificates = models.JSONField()  # To store multiple selected checkboxes as a list
-    request_type = models.CharField(max_length=20, choices=REQUEST_CHOICES)
+    request_type = models.BooleanField(default=False)
+    iscomplete= models.BooleanField(default=False,null=True)
 
     def __str__(self):
         return f"{self.email} - Ward {self.ward}"

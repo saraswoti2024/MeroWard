@@ -113,7 +113,9 @@
         flex-direction: column;
         gap: 10px;
       }
+    
     }
+
   </style>
 </head>
 <body>
@@ -157,14 +159,25 @@
         <label><input type="checkbox" name="certificate" value="birth"> Birth</label>
         <label><input type="checkbox" name="certificate" value="death"> Death</label>
       </div>
+
       
-      <!-- Type of Request Dropdown -->
-      <label for="request_type">Type of Request:</label>
-      <select id="request_type" name="request_type" required>
-        <option value="" disabled selected>Select request type</option>
-        <option value="emergency">Emergency</option>
-        <option value="normal">Normal</option>
-      </select>
+      <div class="forms-group" style="margin-bottom: 25px; background-color: #f9f9f9; padding: 15px; border-radius: 12px; border: 1px solid #ddd;">
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+          <input type="checkbox" name="emergency" id="emergency" style="margin-right: 8px; transform: scale(1.2);">
+          <label for="emergency" style="font-weight: 600; font-size: 16px; color: #333; margin-bottom: 0;">Emergency Request</label>
+        </div>
+        <div style="font-size: 14px; color: #555; line-height: 1.6;">
+          <strong>When to Use Emergency Case Appointment:</strong>
+          <ul style="margin-top: 10px; padding-left: 20px;">
+            <li><strong>Urgent Document Processing</strong>: e.g., birth/death certificate or migration letter needed for hospital, travel, or legal needs.</li>
+            <li><strong>Health-Related Emergencies</strong>: ward verification required for hospital admission or health insurance support.</li>
+          </ul>
+        </div>
+      </div>
+      
+      
+      
+     
 
       <!-- Submit -->
       <button type="submit">Submit Request</button>

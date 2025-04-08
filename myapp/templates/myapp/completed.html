@@ -1,0 +1,66 @@
+{% extends "common.html" %}
+{% block content %}
+{% load static %}
+
+<div class="container">
+    <div class="row">
+      <div class="col-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>Email</th>
+              <th>Ward No</th>
+              <th>Certificates</th>
+              <th>Request Type</th>
+              <th colspan="2" style="text-align: center;">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in data %}
+            <tr>
+              <th scope="row">{{ i.id }}</th>
+              <td>{{ i.email }}</td>
+              <td>{{ i.ward }}</td>
+              <td class="certificate-tags">
+                {% for cert in i.certificates %}
+                  <span>{{ cert|title }}</span>
+                {% endfor %}
+              </td>
+              <td>{{ i.request_type|title }}</td>
+              <td>
+                <!-- model starts -->
+                <button class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#{{i.id}}"> Delete</button>
+
+<!-- modal section -->
+
+<div class="modal fade" id="{{i.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h1 class="modal-title fs-5" id="{{i.id}}">Delete</h1>
+<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<form action="#">
+<div class="modal-body">
+Are You Sure You Want To Delete?
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+<button type="submit" class="btn btn-danger">Delete</button></a>
+</div>
+</form>
+</div>
+</div>
+</div>
+<!-- modal ends -->
+            </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
