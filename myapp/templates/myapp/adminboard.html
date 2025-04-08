@@ -137,6 +137,7 @@
   </div>
 </main>
   <a href="{% url 'completed' %}"><button>View Completed Data</button></a>
+  <a href="{% url 'scheduled' %}"><button>View Scheduled Data</button></a>
 
 
 <!-- Appointment Table -->
@@ -147,6 +148,7 @@
         <thead>
           <tr>
             <th>id</th>
+            <th>FullName</th>
             <th>Email</th>
             <th>Ward No</th>
             <th>Certificates</th>
@@ -158,6 +160,7 @@
           {% for i in appointment %}
           <tr>
             <th scope="row">{{ i.id }}</th>
+            <td>{{i.fullname }}</td>
             <td>{{ i.email }}</td>
             <td>{{ i.ward }}</td>
             <td class="certificate-tags">
@@ -170,7 +173,16 @@
               {% else %}
               <span style="color: green;">Normal</span>
             {% endif %}</td>
-            <td><button>Schedule</button></td>
+            <td>
+              
+              {% if i.isschedule %}
+                  <span>Scheduled</span>  <!-- Optional: you can change this to a different text or button -->
+              {% else %}
+              <a href="{% url 'schedule' i.id %}"><button >Schedule</button></a>
+              {% endif %}
+          </td>
+          
+          
             <td><a href="{% url 'complete' i.id %}"><button >Completed</button></a></td>
           </tr>
           {% endfor %}

@@ -12,6 +12,9 @@ urlpatterns = [
     path("profile_dashboard/",profile_dashboard,name="profile_dashboard"),
     path('complete/<int:id>',complete,name="complete"),
     path("compeleted/",completed,name="completed"),
+    path('schedule/<int:id>',schedule,name="schedule"),
+     path('schedule/',scheduled,name="scheduled"),
+
     #auth
      path("log_in/",log_in,name="log_in"),
      path("register/",register,name="register"),

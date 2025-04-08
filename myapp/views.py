@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from .forms import *
 from .models import *
 from django.contrib import messages
-from datetime import datetime
+from datetime import datetime,timedelta
 from django.template.loader import render_to_string
 from django.core.mail import send_mail,EmailMessage
 from django.contrib.auth.models import User
@@ -79,12 +79,13 @@ def adminboard(request):
 @login_required(login_url='log_in')
 def appointments(request):
     if request.method == 'POST':
+        fullname = request.POST['fullname']
         email = request.POST['email']
         wardno = request.POST['ward']
         request_type = request.POST.get('emergency')=='on'
         certificate = request.POST.getlist('certificate')
         try:
-            AppointmentForm.objects.create(email=email,ward=wardno,request_type=request_type,certificates=certificate)
+            AppointmentForm.objects.create(fullname=fullname,email=email,ward=wardno,request_type=request_type,certificates=certificate)
             messages.success(request,'sent successfully!')
             return redirect('appointments')
         except Exception as e:
@@ -177,3 +178,22 @@ def change_password(request):
 
 def settings(request):
     return render(request,'auth/settings.html')
+
+def schedule(request,id):
+            data = AppointmentForm.objects.get(id=id)
+            emails = data.email[0:5]
+            subject = "welcome Message"
+            message = render_to_string('myapp/gmail2.html',{'emails':emails,'date':(datetime.now()+timedelta(days=1)).date()})
+            from_email = 'saraswotikhadka2k2@gmail.com'
+            recipient_list = [data.email] ##current database store submit
+        # send_mail(subject,message,from_email,recipient_list)
+            emailmsg = EmailMessage(subject,message,from_email,recipient_list)
+            emailmsg.send(fail_silently=True)
+            data.isschedule = True
+            data.save()
+            return redirect('adminboard')
+
+def scheduled(request):
+    data = AppointmentForm.objects.filter(isschedule=True)
+
+    return render(request,'myapp/scheduled.html',{'data':data})
