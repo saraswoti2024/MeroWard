@@ -5,7 +5,8 @@ from django.contrib import messages
 from datetime import datetime,timedelta
 from django.template.loader import render_to_string
 from django.core.mail import send_mail,EmailMessage
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import CustomUserModel
+from .models import CustomUserModel
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.decorators import login_required
@@ -53,7 +54,11 @@ def complete(request,id):
     data.iscomplete=True
     data.isschedule=False
     data.save()
-    return redirect('adminboard')
+    next_page = request.GET.get('next')
+    if next_page == 'scheduled':
+        return redirect('scheduled')
+    else:
+        return redirect('adminboard')
 
 def completed(request):
     data = AppointmentForm.objects.filter(iscomplete=True)
@@ -66,7 +71,7 @@ def completed(request):
 def adminboard(request):
     total_appointment = AppointmentForm.objects.count()
     appointment = AppointmentForm.objects.filter(iscomplete=False)
-    total_users = User.objects.count()
+    total_users = CustomUserModel.objects.count()
     total_contact = Contact.objects.count()
     context={
         'totala':total_appointment,
@@ -104,7 +109,7 @@ def log_in(request):
     if request.method=='POST':
         uname = request.POST['username']
         password = request.POST['password']
-        if not User.objects.filter(username=uname).exists():
+        if not CustomUserModel.objects.filter(username=uname).exists():
             messages.error(request,'username doesnot exists!')
             return redirect('log_in')
         people = authenticate(username=uname,password=password)
@@ -143,13 +148,13 @@ def register(request):
                 if not re.search(r'\W',password):
                     messages.error(request,'password should at least contain one special character')
                     return redirect('register')
-                if User.objects.filter(username=uname).exists():
+                if CustomUserModel.objects.filter(username=uname).exists():
                     messages.error(request,'username already exists!')
                     return redirect('register')
-                if User.objects.filter(email=email).exists():
+                if CustomUserModel.objects.filter(email=email).exists():
                     messages.error(request,'email already exists!')
                     return redirect('register')
-                User.objects.create_user(first_name=fname,last_name=lname,username=uname,email=email,password=password)
+                CustomUserModel.objects.create_user(first_name=fname,last_name=lname,username=uname,email=email,password=password,word_no=13)
                 messages.success(request,'Register successfully!<br>Redirecting to login page......')
                 return redirect('register')
             except Exception as e:
